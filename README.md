@@ -9,6 +9,7 @@ The DCP405_voltage_follower.py works on a EEZ BB3 PSU with 2 mounted DCP405 Modu
 Channel 1 output is always disabled. The script reads the voltage from this channel.
 Channel 2 can set to enabled and will output the same voltage it reads on Channel 1 by default at 100mA.
 The Output voltage and current can be adjusted. 
+
 <img src="GUI-working.jpg">
 
 The complete .py script and .eez-project file was created by claude. Of course, several iterations were needed. But i'm flashed how well claude code works.
