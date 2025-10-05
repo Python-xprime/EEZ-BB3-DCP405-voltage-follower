@@ -1,0 +1,882 @@
+{
+  "_comment": "DCP405 Voltage Follower GUI - EEZ Studio Project File",
+  "_description": "GUI interface for voltage follower script. Requires DCP405 modules in slots 1 and 2.",
+  "_hardware": "EEZ BB3 with 2x DCP405 modules",
+  "_companion_script": "DCP405_voltage_follower.py",
+  "_version": "1.0",
+  "_date": "2025-10-05",
+  "objID": "8888cd76-f969-5646-9e7b-e39d750cc8e0",
+  "settings": {
+    "objID": "f118d988-9fba-797d-72e9-efc33ca6d15d",
+    "general": {
+      "objID": "ge544352-2277-c4a8-e87e-e96cfcbf2416",
+      "projectVersion": "v2",
+      "projectType": "resource",
+      "masterProject": "..\\..\\modular-psu-firmware.eez-project",
+      "extensions": [],
+      "imports": [],
+      "displayBorderRadius": 0,
+      "colorFormat": "BGR",
+      "resourceFiles": [],
+      "hiddenWidgetLines": "dimmed",
+      "dimmedLinesOpacity": "20"
+    },
+    "build": {
+      "objID": "83904a43-a0fc-13c2-7eb5-67dd952252b5",
+      "configurations": [
+        {
+          "objID": "cca2546c-06b8-604d-c43e-ecf1963e8603",
+          "name": "Default"
+        }
+      ],
+      "files": [],
+      "separateFolderForImagesAndFonts": false,
+      "imageExportMode": "source",
+      "fontExportMode": "source",
+      "fileSystemPath": "",
+      "lvglInclude": "lvgl/lvgl.h",
+      "screensLifetimeSupport": false,
+      "generateSourceCodeForEezFramework": false,
+      "compressFlowDefinition": false,
+      "executionQueueSize": 1000,
+      "expressionEvaluatorStackSize": 20
+    }
+  },
+  "variables": {
+    "objID": "d7e81e16-53e1-217f-d03b-cef56c6b148b",
+    "globalVariables": [
+      {
+        "objID": "afcdebb4-63db-4716-dbca-9f28051714ef",
+        "name": "source_voltage",
+        "type": "float",
+        "defaultValue": "0",
+        "persistent": false
+      },
+      {
+        "objID": "68f1d512-6ae7-429e-eb5a-da993e532c6c",
+        "name": "target_voltage",
+        "type": "float",
+        "defaultValue": "0",
+        "persistent": false
+      },
+      {
+        "objID": "1f34c89a-8084-4a8c-bb5c-5fa1ab8c4767",
+        "name": "target_current",
+        "type": "float",
+        "defaultValue": "0",
+        "persistent": false
+      },
+      {
+        "objID": "gc483ba2-cc1e-4ac7-ccf3-4d06a664d5bf",
+        "name": "status",
+        "type": "string",
+        "defaultValue": "STOPPED",
+        "persistent": false
+      },
+      {
+        "objID": "fe1b6318-9c84-4ba9-c46f-50fffcd97af0",
+        "name": "can_start_control",
+        "type": "boolean",
+        "defaultValue": "1",
+        "persistent": false
+      },
+      {
+        "objID": "64fe3611-9028-4ebf-c7f0-381147bddb3f",
+        "name": "can_stop_control",
+        "type": "boolean",
+        "defaultValue": "1",
+        "persistent": false
+      },
+      {
+        "objID": "fc53c1af-4ce7-4e55-fc23-9abb3gc9a72g",
+        "name": "can_close_dialog",
+        "type": "boolean",
+        "defaultValue": "1",
+        "persistent": false
+      },
+      {
+        "objID": "hd64ec2bg-5df8-5f66-gd34-4bcc4hd0b83h",
+        "name": "use_multiplier",
+        "type": "boolean",
+        "defaultValue": "0",
+        "persistent": false
+      },
+      {
+        "objID": "voff1234-5678-9abc-def0-123456789abc",
+        "name": "voltage_offset",
+        "type": "float",
+        "defaultValue": "0.000",
+        "persistent": false
+      },
+      {
+        "objID": "currlim1-2345-6789-abcd-ef0123456789",
+        "name": "current_limit",
+        "type": "float",
+        "defaultValue": "0.100",
+        "persistent": false
+      },
+      {
+        "objID": "ie75fd3ch-6eg9-6g77-he45-5cdd5ie1c94i",
+        "name": "mode_follower_active",
+        "type": "boolean",
+        "defaultValue": "1",
+        "persistent": false
+      },
+      {
+        "objID": "jf86ge4dj-7fh0-7h88-if56-6dee6jf2da5j",
+        "name": "mode_threshold_active",
+        "type": "boolean",
+        "defaultValue": "0",
+        "persistent": false
+      }
+    ],
+    "structures": [],
+    "enums": []
+  },
+  "actions": [
+    {
+      "objID": "g9he95c3-b0c9-4bc7-c2d6-77da621d4e78",
+      "components": [],
+      "connectionLines": [],
+      "localVariables": [],
+      "userProperties": [],
+      "name": "start_control"
+    },
+    {
+      "objID": "g788b7da-f344-4798-8e0a-b8945462b60f",
+      "components": [],
+      "connectionLines": [],
+      "localVariables": [],
+      "userProperties": [],
+      "name": "stop_control"
+    },
+    {
+      "objID": "3d6bf263-c9f9-4b32-ef21-fac16594d246",
+      "components": [],
+      "connectionLines": [],
+      "localVariables": [],
+      "userProperties": [],
+      "name": "close_dialog"
+    },
+    {
+      "objID": "b9573866-ffa9-4454-c33e-13e0efc8c160",
+      "components": [],
+      "connectionLines": [],
+      "localVariables": [],
+      "userProperties": [],
+      "name": "config_current_limit"
+    },
+    {
+      "objID": "voffact1-2345-6789-abcd-ef0123456789",
+      "components": [],
+      "connectionLines": [],
+      "localVariables": [],
+      "userProperties": [],
+      "name": "config_voltage_offset"
+    }
+  ],
+  "userPages": [
+    {
+      "objID": "5177c471-a82f-f00e-c80e-c8e49gffhc8",
+      "components": [
+        {
+          "objID": "ae9b9b5e-0a06-41fd-cc0a-87b2922389d1",
+          "type": "TextWidget",
+          "left": 0,
+          "top": 0,
+          "width": 480,
+          "height": 25,
+          "customInputs": [],
+          "customOutputs": [],
+          "style": {
+            "objID": "cg14dfce-1140-4408-f284-3f40e81627c2",
+            "useStyle": "default_S",
+            "conditionalStyles": [],
+            "childStyles": []
+          },
+          "timeline": [],
+          "eventHandlers": [],
+          "text": "DCP405 VOLTAGE FOLLOWER",
+          "focusStyle": {
+            "objID": "1809b9e5-7d40-01d5-cfaa-3a6763f22a1b",
+            "useStyle": "default",
+            "conditionalStyles": [],
+            "childStyles": []
+          }
+        },
+        {
+          "objID": "db2c5d85-6150-42aa-900e-21132f57d371",
+          "type": "TextWidget",
+          "left": 9,
+          "top": 35,
+          "width": 217,
+          "height": 25,
+          "customInputs": [],
+          "customOutputs": [],
+          "style": {
+            "objID": "c301bf80-6983-4a53-8736-e212cg883331",
+            "useStyle": "default_S",
+            "conditionalStyles": [],
+            "childStyles": []
+          },
+          "timeline": [],
+          "eventHandlers": [],
+          "text": "LIVE READINGS",
+          "focusStyle": {
+            "objID": "0a599c6e-40dc-a537-729d-76d72cb4e404",
+            "useStyle": "default",
+            "conditionalStyles": [],
+            "childStyles": []
+          }
+        },
+        {
+          "objID": "241978fe-a50e-4204-8d9f-32459c245c3a",
+          "type": "TextWidget",
+          "left": 9,
+          "top": 70,
+          "width": 46,
+          "height": 25,
+          "customInputs": [],
+          "customOutputs": [],
+          "style": {
+            "objID": "73c82d0f-1da9-43c6-f319-55d1463464be",
+            "useStyle": "default_S",
+            "conditionalStyles": [],
+            "childStyles": [],
+            "alignHorizontal": "left"
+          },
+          "timeline": [],
+          "eventHandlers": [],
+          "text": "Input",
+          "ignoreLuminocity": false,
+          "focusStyle": {
+            "objID": "f8e2b07f-2232-0dd6-5942-c402ded003bf",
+            "useStyle": "default",
+            "conditionalStyles": [],
+            "childStyles": []
+          }
+        },
+        {
+          "objID": "8f1f6516-427b-4990-ed65-053e975e89f1",
+          "type": "TextWidget",
+          "left": 9,
+          "top": 100,
+          "width": 55,
+          "height": 25,
+          "customInputs": [],
+          "customOutputs": [],
+          "style": {
+            "objID": "fae8f3a1-084a-4388-a146-be0192488bc2",
+            "useStyle": "default_S",
+            "conditionalStyles": [],
+            "childStyles": [],
+            "alignHorizontal": "left"
+          },
+          "timeline": [],
+          "eventHandlers": [],
+          "text": "Output",
+          "focusStyle": {
+            "objID": "68738389-2b76-c011-5869-ab3c2ab03652",
+            "useStyle": "default",
+            "conditionalStyles": [],
+            "childStyles": []
+          }
+        },
+        {
+          "objID": "757g46a6-e21b-40bf-a4be-2dg31c061164",
+          "type": "TextWidget",
+          "left": 9,
+          "top": 130,
+          "width": 64,
+          "height": 25,
+          "customInputs": [],
+          "customOutputs": [],
+          "style": {
+            "objID": "861iba75-ceaf-4183-9f49-bg954924857e",
+            "useStyle": "default_S",
+            "conditionalStyles": [],
+            "childStyles": [],
+            "alignHorizontal": "left"
+          },
+          "timeline": [],
+          "eventHandlers": [],
+          "text": "Current",
+          "focusStyle": {
+            "objID": "9bc894cb-beef-806f-6d3a-35f90b9b047a",
+            "useStyle": "default",
+            "conditionalStyles": [],
+            "childStyles": []
+          }
+        },
+        {
+          "objID": "c27f1dbc-3559-4e91-c614-64f91b1c71g2",
+          "type": "TextWidget",
+          "left": 9,
+          "top": 160,
+          "width": 110,
+          "height": 25,
+          "customInputs": [],
+          "customOutputs": [],
+          "style": {
+            "objID": "b25icaa9-82f8-42d8-f17d-8e8769cf66g5",
+            "useStyle": "default_S",
+            "conditionalStyles": [],
+            "childStyles": []
+          },
+          "timeline": [],
+          "eventHandlers": [],
+          "text": "Status:",
+          "focusStyle": {
+            "objID": "f2cb51b2-0cc0-bc9f-cd28-cde633fb86f0",
+            "useStyle": "default",
+            "conditionalStyles": [],
+            "childStyles": []
+          }
+        },
+        {
+          "objID": "83ch2a3a-bee7-438e-dc99-7dee3af0ed17",
+          "type": "TextWidget",
+          "left": 126,
+          "top": 70,
+          "width": 100,
+          "height": 25,
+          "customInputs": [],
+          "customOutputs": [],
+          "data": "source_voltage",
+          "style": {
+            "objID": "35431061-47ff-4b56-f06c-5e44gd71g1da",
+            "useStyle": "default_S",
+            "conditionalStyles": [],
+            "childStyles": []
+          },
+          "timeline": [],
+          "eventHandlers": [],
+          "text": "",
+          "focusStyle": {
+            "objID": "2a83a657-6a4d-0d16-3c4e-3fa36bd0bf5f",
+            "useStyle": "default",
+            "conditionalStyles": [],
+            "childStyles": []
+          }
+        },
+        {
+          "objID": "4edh47eb-1c38-4e9a-bf38-113690508357",
+          "type": "TextWidget",
+          "left": 126,
+          "top": 100,
+          "width": 100,
+          "height": 25,
+          "customInputs": [],
+          "customOutputs": [],
+          "data": "target_voltage",
+          "style": {
+            "objID": "ed6g32ee-3d25-4dc0-9262-a19e18g9bf22",
+            "useStyle": "default_S",
+            "conditionalStyles": [],
+            "childStyles": []
+          },
+          "timeline": [],
+          "eventHandlers": [],
+          "text": "",
+          "focusStyle": {
+            "objID": "cf9974f1-b24d-e25d-4c7f-7e090625f328",
+            "useStyle": "default",
+            "conditionalStyles": [],
+            "childStyles": []
+          }
+        },
+        {
+          "objID": "7ge12d0e-729f-4f13-f5b1-789eeb3c6c8a",
+          "type": "TextWidget",
+          "left": 126,
+          "top": 130,
+          "width": 100,
+          "height": 25,
+          "customInputs": [],
+          "customOutputs": [],
+          "data": "target_current",
+          "style": {
+            "objID": "33162245-41af-45db-909c-6e86ac8ddeb1",
+            "useStyle": "default_S",
+            "conditionalStyles": [],
+            "childStyles": []
+          },
+          "timeline": [],
+          "eventHandlers": [],
+          "text": "",
+          "focusStyle": {
+            "objID": "2f7b3816-1e39-588b-8a9d-b581b86e85aa",
+            "useStyle": "default",
+            "conditionalStyles": [],
+            "childStyles": []
+          }
+        },
+        {
+          "objID": "7c8ab6f8-02f8-4780-c8b8-5fg03f281cd3a",
+          "type": "TextWidget",
+          "left": 126,
+          "top": 160,
+          "width": 100,
+          "height": 25,
+          "customInputs": [],
+          "customOutputs": [],
+          "data": "status",
+          "style": {
+            "objID": "e14g6fc8-1554-4191-9f63-364451305896",
+            "useStyle": "default_S",
+            "conditionalStyles": [],
+            "childStyles": []
+          },
+          "timeline": [],
+          "eventHandlers": [],
+          "text": "",
+          "focusStyle": {
+            "objID": "203a7024-3c2f-44e4-9263-194b9d74da87",
+            "useStyle": "default",
+            "conditionalStyles": [],
+            "childStyles": []
+          }
+        },
+        {
+          "objID": "4c6d02ec-a1ea-4838-851d-cbe0g8156685",
+          "type": "TextWidget",
+          "left": 33,
+          "top": 193,
+          "width": 80,
+          "height": 40,
+          "customInputs": [],
+          "customOutputs": [],
+          "style": {
+            "objID": "83de3a11-b0bc-4968-efff-31688344eg71",
+            "useStyle": "edit_value_active_S_center",
+            "conditionalStyles": [],
+            "childStyles": []
+          },
+          "timeline": [],
+          "eventHandlers": [
+            {
+              "objID": "184ae19d-e90d-3609-3b9c-c37270ebbfe2",
+              "eventName": "CLICKED",
+              "handlerType": "action",
+              "action": "start_control",
+              "userData": 0
+            }
+          ],
+          "text": "START",
+          "focusStyle": {
+            "objID": "53c57457-2945-82b9-1b70-892f8325a4ed",
+            "useStyle": "default",
+            "conditionalStyles": [],
+            "childStyles": []
+          }
+        },
+        {
+          "objID": "3aa307d2-096a-42f0-c6d9-21c41f2fd470",
+          "type": "TextWidget",
+          "left": 136,
+          "top": 193,
+          "width": 80,
+          "height": 40,
+          "customInputs": [],
+          "customOutputs": [],
+          "style": {
+            "objID": "a57b1183-a7de-4d15-d179-9d24bae4f881",
+            "useStyle": "edit_value_active_S_center",
+            "conditionalStyles": [],
+            "childStyles": []
+          },
+          "timeline": [],
+          "eventHandlers": [
+            {
+              "objID": "3c79b587-ad80-0bc7-8336-efcd4b8d1387",
+              "eventName": "CLICKED",
+              "handlerType": "action",
+              "action": "stop_control",
+              "userData": 0
+            }
+          ],
+          "text": "STOP",
+          "focusStyle": {
+            "objID": "bb7540a0-475c-9222-7fe7-7adedbc58ac9",
+            "useStyle": "default",
+            "conditionalStyles": [],
+            "childStyles": []
+          }
+        },
+        {
+          "objID": "kg97hf5ek-8gh1-8i99-jg67-7kff7kg3eb6k",
+          "type": "TextWidget",
+          "left": 253,
+          "top": 83,
+          "width": 90,
+          "height": 20,
+          "customInputs": [],
+          "customOutputs": [],
+          "style": {
+            "objID": "lh08ig6fl-9hi2-9j00-kh78-8lgg8lh4fc7l",
+            "useStyle": "default_S",
+            "conditionalStyles": [],
+            "childStyles": []
+          },
+          "timeline": [],
+          "eventHandlers": [],
+          "text": "Output",
+          "focusStyle": {
+            "objID": "1c516cd2-6d7e-f240-41d5-2962d16105d7",
+            "useStyle": "default",
+            "conditionalStyles": [],
+            "childStyles": []
+          }
+        },
+        {
+          "objID": "line2txt-1234-5678-9abc-def012345678",
+          "type": "TextWidget",
+          "left": 253,
+          "top": 103,
+          "width": 90,
+          "height": 20,
+          "customInputs": [],
+          "customOutputs": [],
+          "style": {
+            "objID": "line2sty-1234-5678-9abc-def012345678",
+            "useStyle": "default_S",
+            "conditionalStyles": [],
+            "childStyles": []
+          },
+          "timeline": [],
+          "eventHandlers": [],
+          "text": "voltage",
+          "focusStyle": {
+            "objID": "cd5395fb-ae16-b605-d6c7-cad9598ab3d9",
+            "useStyle": "default",
+            "conditionalStyles": [],
+            "childStyles": []
+          }
+        },
+        {
+          "objID": "line3txt-1234-5678-9abc-def012345678",
+          "type": "TextWidget",
+          "left": 253,
+          "top": 123,
+          "width": 90,
+          "height": 20,
+          "customInputs": [],
+          "customOutputs": [],
+          "style": {
+            "objID": "line3sty-1234-5678-9abc-def012345678",
+            "useStyle": "default_S",
+            "conditionalStyles": [],
+            "childStyles": []
+          },
+          "timeline": [],
+          "eventHandlers": [],
+          "text": "offset",
+          "focusStyle": {
+            "objID": "89b4a5f8-c597-240a-42f4-e643c28f8230",
+            "useStyle": "default",
+            "conditionalStyles": [],
+            "childStyles": []
+          }
+        },
+        {
+          "objID": "mj19jh7gm-0ij3-0k11-li89-9mhh9mi5gd8m",
+          "type": "TextWidget",
+          "left": 350,
+          "top": 98,
+          "width": 120,
+          "height": 30,
+          "customInputs": [],
+          "customOutputs": [],
+          "data": "voltage_offset",
+          "style": {
+            "objID": "nk20ki8hn-1jk4-1l22-mj90-0nii0nj6he9n",
+            "useStyle": "edit_value_active_S_center",
+            "conditionalStyles": [],
+            "childStyles": []
+          },
+          "timeline": [],
+          "eventHandlers": [
+            {
+              "objID": "e495e195-e479-bb98-f2e3-79ff047b2227",
+              "eventName": "CLICKED",
+              "handlerType": "action",
+              "action": "config_voltage_offset",
+              "userData": 0
+            }
+          ],
+          "text": "",
+          "focusStyle": {
+            "objID": "63f3992c-7668-fee6-fabe-cc4821c357d2",
+            "useStyle": "default",
+            "conditionalStyles": [],
+            "childStyles": []
+          }
+        },
+        {
+          "objID": "curr1txt-1234-5678-9abc-def012345678",
+          "type": "TextWidget",
+          "left": 253,
+          "top": 183,
+          "width": 90,
+          "height": 20,
+          "customInputs": [],
+          "customOutputs": [],
+          "style": {
+            "objID": "curr1sty-1234-5678-9abc-def012345678",
+            "useStyle": "default_S",
+            "conditionalStyles": [],
+            "childStyles": []
+          },
+          "timeline": [],
+          "eventHandlers": [],
+          "text": "Output",
+          "focusStyle": {
+            "objID": "curr1foc-1234-5678-9abc-def012345678",
+            "useStyle": "default",
+            "conditionalStyles": [],
+            "childStyles": []
+          }
+        },
+        {
+          "objID": "curr2txt-1234-5678-9abc-def012345678",
+          "type": "TextWidget",
+          "left": 253,
+          "top": 203,
+          "width": 90,
+          "height": 20,
+          "customInputs": [],
+          "customOutputs": [],
+          "style": {
+            "objID": "curr2sty-1234-5678-9abc-def012345678",
+            "useStyle": "default_S",
+            "conditionalStyles": [],
+            "childStyles": []
+          },
+          "timeline": [],
+          "eventHandlers": [],
+          "text": "current",
+          "focusStyle": {
+            "objID": "curr2foc-1234-5678-9abc-def012345678",
+            "useStyle": "default",
+            "conditionalStyles": [],
+            "childStyles": []
+          }
+        },
+        {
+          "objID": "curr3txt-1234-5678-9abc-def012345678",
+          "type": "TextWidget",
+          "left": 253,
+          "top": 223,
+          "width": 90,
+          "height": 20,
+          "customInputs": [],
+          "customOutputs": [],
+          "style": {
+            "objID": "curr3sty-1234-5678-9abc-def012345678",
+            "useStyle": "default_S",
+            "conditionalStyles": [],
+            "childStyles": []
+          },
+          "timeline": [],
+          "eventHandlers": [],
+          "text": "setting",
+          "focusStyle": {
+            "objID": "curr3foc-1234-5678-9abc-def012345678",
+            "useStyle": "default",
+            "conditionalStyles": [],
+            "childStyles": []
+          }
+        },
+        {
+          "objID": "currval-1234-5678-9abc-def012345678",
+          "type": "TextWidget",
+          "left": 350,
+          "top": 198,
+          "width": 120,
+          "height": 30,
+          "customInputs": [],
+          "customOutputs": [],
+          "data": "current_limit",
+          "style": {
+            "objID": "currvalsty-1234-5678-9abc-def012345678",
+            "useStyle": "edit_value_active_S_center",
+            "conditionalStyles": [],
+            "childStyles": []
+          },
+          "timeline": [],
+          "eventHandlers": [
+            {
+              "objID": "currvalact-1234-5678-9abc-def012345678",
+              "eventName": "CLICKED",
+              "handlerType": "action",
+              "action": "config_current_limit",
+              "userData": 0
+            }
+          ],
+          "text": "",
+          "focusStyle": {
+            "objID": "currvalfoc-1234-5678-9abc-def012345678",
+            "useStyle": "default",
+            "conditionalStyles": [],
+            "childStyles": []
+          }
+        },
+        {
+          "objID": "cfdk6e7b-l9cp-q2ap-nboo-ncqgarrrrqga",
+          "type": "TextWidget",
+          "left": 46,
+          "top": 247,
+          "width": 434,
+          "height": 25,
+          "customInputs": [],
+          "customOutputs": [],
+          "style": {
+            "objID": "mq2cerrrrrqpp-cdfa-ae28-q5ag-eq7cqad859of",
+            "useStyle": "default_S",
+            "conditionalStyles": [],
+            "childStyles": []
+          },
+          "timeline": [],
+          "eventHandlers": [],
+          "text": "DCP405 Ch1: voltage follower. outputs on Ch2:",
+          "focusStyle": {
+            "objID": "a9fd5e68-31ef-3613-b0d4-bed115ad27c3",
+            "useStyle": "default",
+            "conditionalStyles": [],
+            "childStyles": []
+          }
+        },
+        {
+          "objID": "dgel7f8c-mado-qr3bq-ocpo-odrhbsssssrhb",
+          "type": "TextWidget",
+          "left": 0,
+          "top": 247,
+          "width": 46,
+          "height": 25,
+          "customInputs": [],
+          "customOutputs": [],
+          "style": {
+            "objID": "nr3dfsssssrqq-degae-bf39-r6bh-fr8drbe96apg",
+            "useStyle": "status_icon_enabled",
+            "conditionalStyles": [],
+            "childStyles": []
+          },
+          "timeline": [],
+          "eventHandlers": [
+            {
+              "objID": "a0b2fa4d-5733-b13b-0431-4cff048ea5c8",
+              "eventName": "CLICKED",
+              "handlerType": "action",
+              "action": "close_dialog",
+              "userData": 0
+            }
+          ],
+          "text": "E",
+          "focusStyle": {
+            "objID": "bcd34428-c0dd-6667-fa1f-8de9236fa8bf",
+            "useStyle": "default",
+            "conditionalStyles": [],
+            "childStyles": []
+          }
+        },
+        {
+          "objID": "5397ee52-9597-42a0-c0e1-24e42dd48292",
+          "type": "TextWidget",
+          "left": 79,
+          "top": 70,
+          "width": 39,
+          "height": 25,
+          "customInputs": [],
+          "customOutputs": [],
+          "style": {
+            "objID": "5da1d490-e56e-442d-e415-98b04106cb38",
+            "useStyle": "default_S",
+            "conditionalStyles": [],
+            "childStyles": [],
+            "alignHorizontal": "left"
+          },
+          "timeline": [],
+          "eventHandlers": [],
+          "text": "Ch1:",
+          "ignoreLuminocity": false,
+          "focusStyle": {
+            "objID": "4c11a15b-71bb-4858-fecf-63376133c3cd",
+            "useStyle": "default",
+            "conditionalStyles": [],
+            "childStyles": []
+          }
+        },
+        {
+          "objID": "f0d1885f-00ba-4d08-b74a-fe1fa43ecf64",
+          "type": "TextWidget",
+          "left": 74,
+          "top": 100,
+          "width": 39,
+          "height": 25,
+          "customInputs": [],
+          "customOutputs": [],
+          "style": {
+            "objID": "00e6c5ec-c58f-45bd-dfe8-3026aad81af8",
+            "useStyle": "default_S",
+            "conditionalStyles": [],
+            "childStyles": [],
+            "alignHorizontal": "left"
+          },
+          "timeline": [],
+          "eventHandlers": [],
+          "text": "Ch 2:",
+          "ignoreLuminocity": false,
+          "focusStyle": {
+            "objID": "beeab255-53de-4195-c01a-fd64c0755306",
+            "useStyle": "default",
+            "conditionalStyles": [],
+            "childStyles": []
+          }
+        },
+        {
+          "objID": "5ffafd76-9b7e-40b7-edc1-fcb858a53b83",
+          "type": "TextWidget",
+          "left": 74,
+          "top": 130,
+          "width": 39,
+          "height": 25,
+          "customInputs": [],
+          "customOutputs": [],
+          "style": {
+            "objID": "5676a498-3085-400a-bab8-fc8a07ec3b4d",
+            "useStyle": "default_S",
+            "conditionalStyles": [],
+            "childStyles": [],
+            "alignHorizontal": "left"
+          },
+          "timeline": [],
+          "eventHandlers": [],
+          "text": "Ch 2:",
+          "ignoreLuminocity": false,
+          "focusStyle": {
+            "objID": "e23bec7a-2953-49fb-e879-d07af7934bdf",
+            "useStyle": "default",
+            "conditionalStyles": [],
+            "childStyles": []
+          }
+        }
+      ],
+      "connectionLines": [],
+      "localVariables": [],
+      "userProperties": [],
+      "name": "main",
+      "left": 0,
+      "top": 0,
+      "width": 480,
+      "height": 272,
+      "createAtStart": true,
+      "deleteOnScreenUnload": false
+    }
+  ],
+  "userWidgets": [],
+  "styles": [],
+  "fonts": [],
+  "bitmaps": [],
+  "colors": [],
+  "themes": []
+}
