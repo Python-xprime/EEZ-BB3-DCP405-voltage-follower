@@ -37,8 +37,8 @@ except ImportError:
     sys.exit(1)
 
 DMM6500_IP = "192.168.0.1"
-USERNAME = "<your username (default admin, thank you Keithley for taking security serious)>"
-PASSWORD = "<your password (default admin, thank you Keithley for taking security serious)>"
+USERNAME = "<your username (default admin, thank you Keithley for taking security seriously)>"
+PASSWORD = "<your password (default admin, thank you Keithley for taking security seriously)>"
 
 # Default browser based on platform
 import platform
